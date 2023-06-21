@@ -16,7 +16,14 @@ function safe_comments_admin_menu() {
 
 function safe_comments_admin_page() {
 	include( 'dashboard.php' );
-} 
+}
+
+add_action('init','init_safe_comments');
+
+function enqueue_custom_scripts() {
+
+	wp_enqueue_script( 'safe_comments_js', plugins_url( '/js/custom-script.js', __FILE__ ), array( 'jquery' ) );
+}
 
 function init_safe_comments() {
 	include( 'dbHandler.php' );
@@ -24,13 +31,6 @@ function init_safe_comments() {
 	add_action( 'admin_menu', 'safe_comments_admin_menu' );
 	add_action( 'wp_enqueue_scripts', 'enqueue_custom_scripts' );
 
-}
-
-add_action('init','init_safe_comments');
-
-function enqueue_custom_scripts() {
-	wp_enqueue_script( 'jquery' );
-	wp_enqueue_script( 'safe_comments_js', plugins_url( '/js/custom-script.js', __FILE__ ) );
 }
 
 
